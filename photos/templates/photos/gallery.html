@@ -28,9 +28,9 @@
             <div class="card-header">Categories</div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">All</li>
-              <li class="list-group-item">Cras justo odio</li>
-              <li class="list-group-item">Dapibus ac facilisis in</li>
-              <li class="list-group-item">Vestibulum at eros</li>
+              {% for category in categories %}
+              <li class="list-group-item">{{ category.name }}</li>
+              {%endfor %}
               <a
                 href="{% url 'add' %}"
                 class="btn btn-dark btn-block btn-sm m-1"
@@ -41,74 +41,27 @@
         </div>
         <div class="col-md-9">
           <div class="row">
+            {% for photo in photos %}
             <div class="col-md-4">
               <div class="card my-2">
                 <img
                   class="image-thumbnail"
-                  src="https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_1280.jpg"
+                  src="{{ photo.image.url }}"
                   alt="Card image cap"
                 />
                 <div class="card-body">
-                  <small>Category: Pets</small>
+                  <small>Category: {{ photo.category.name }}</small>
                 </div>
                 <a
-                  href="{% url 'photo' 5 %}"
+                  href="{% url 'photo' photo.id %}"
                   class="btn btn-outline-dark btn-sm m-1"
                   >View</a
                 >
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="card my-2">
-                <img
-                  class="image-thumbnail"
-                  src="https://images.unsplash.com/photo-1608848461950-0fe51dfc41cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8fA%3D%3D&w=1000&q=80"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <small>Category: Pets</small>
-                </div>
-                <a
-                  href="{% url 'photo' 5 %}"
-                  class="btn btn-outline-dark btn-sm m-1"
-                  >View</a
-                >
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card my-2">
-                <img
-                  class="image-thumbnail"
-                  src="https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_1280.jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <small>Category: Pets</small>
-                </div>
-                <a
-                  href="{% url 'photo' 5 %}"
-                  class="btn btn-outline-dark btn-sm m-1"
-                  >View</a
-                >
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card my-2">
-                <img
-                  class="image-thumbnail"
-                  src="https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_1280.jpg"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <small>Category: Pets</small>
-                </div>
-                <a
-                  href="{% url 'photo' 5 %}"
-                  class="btn btn-outline-dark btn-sm m-1"
-                  >View</a
-                >
-              </div>
-            </div>
+            {% empty %}
+            <h3>No photos ...</h3>
+            {% endfor %}
           </div>
         </div>
       </div>
